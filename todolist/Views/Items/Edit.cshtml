@@ -1,9 +1,9 @@
-﻿@{ 
-    ViewData["Title"] = "To Do List";
+﻿@model ToDoList.Models.Item
+
+@{ 
+    ViewData["Title"] = "Item - Edit";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-@model ToDoList.Models.Item
 
 <h2>Edit</h2>
 <hr />
@@ -15,7 +15,8 @@
 
     @Html.LabelFor(model => model.Description)
     @Html.EditorFor(model => model.Description)
-    @Html.EditorFor(model => model.Done)
+    @Html.DropDownList("CategoryId")
+    <p>Mark if done: @Html.EditorFor(model => model.Done)</p>
     <input type="submit" value="Save" />
 }
 <p>@Html.ActionLink("Back to list", "Index")</p>

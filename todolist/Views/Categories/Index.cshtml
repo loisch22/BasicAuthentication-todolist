@@ -1,0 +1,18 @@
+﻿@model IEnumerable<ToDoList.Models.Category>
+
+@{ 
+    ViewData["Title"] = "To Do";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Categories of Tasks</h1>
+<hr/>
+<h4>@Html.DisplayNameFor(model => model.Name)</h4>
+<ul>
+    @foreach(var category in Model)
+	{
+	   <li>@Html.DisplayFor(modelCategory => category.Name) 
+	    
+	    </li>
+	}
+</ul>

@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ToDoList.Models;
 
@@ -16,7 +14,7 @@ namespace ToDoList.Controllers
 
 		public IActionResult Index()
 		{
-			return View(db.Items.ToList());
+			return View(db.Items.Include(items => items.Category).ToList());
 		}
 
 		public IActionResult Details(int id)
@@ -27,6 +25,7 @@ namespace ToDoList.Controllers
 
         public IActionResult Create()
         {
+            ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "Name");
             return View();
         }
 
@@ -37,10 +36,13 @@ namespace ToDoList.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+
+
 		public IActionResult Edit(int id)
 		{
 			var thisItem = db.Items.FirstOrDefault(items => items.ItemId == id);
-			return View(thisItem);
+			ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "Name");
+            return View(thisItem);
 		}
 		[HttpPost]
         public IActionResult Edit(Item item)

@@ -13,6 +13,7 @@
     <Folder Include="Views\Items\" />
     <Folder Include="Views\Shared\" />
     <Folder Include="wwwroot\css\" />
+    <Folder Include="Views\Categories\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -23,4 +24,8 @@
     <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="1.1.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="Items.sql.zip" />
+    <None Remove="to_do_list.sql.zip" />
+  </ItemGroup>
 </Project>
