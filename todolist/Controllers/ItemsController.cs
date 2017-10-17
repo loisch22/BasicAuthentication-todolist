@@ -46,7 +46,7 @@ namespace ToDoList.Controllers
         [HttpPost]
         public IActionResult Create(Item item)
         {
-            itemRepo.Save();
+            itemRepo.Save(item);
             return RedirectToAction("Index");
         }
 
