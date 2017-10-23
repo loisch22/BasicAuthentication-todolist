@@ -2,12 +2,15 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.EntityFrameworkCore;
-using ToDoList.Models;
 using Microsoft.Extensions.Configuration;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore;
+using BasicAuthentication.Models;
+//gives Startup class access to Identity
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
-namespace ToDoList
+
+namespace BasicAuthentication
 {
 	public class Startup
 	{
@@ -19,35 +22,31 @@ namespace ToDoList
 				.AddJsonFile("appsettings.json");
 			Configuration = builder.Build();
 		}
-		// This method gets called by the runtime. Use this method to add services to the container.
-		// For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
 		public void ConfigureServices(IServiceCollection services)
 		{
 			services.AddMvc();
 			services.AddEntityFrameworkMySql()
-					.AddDbContext<ToDoListContext>(options =>
+					.AddDbContext<ApplicationDbContext>(options =>
 											  options
 												   .UseMySql(Configuration["ConnectionStrings:DefaultConnection"]));
-		}
+            //tells Identity what we want to use as a model for our user
+			services.AddIdentity<ApplicationUser, IdentityRole>()
+					.AddEntityFrameworkStores<ApplicationDbContext>()
+					.AddDefaultTokenProviders();
+        }
 
-		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-		public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+		public void Configure(IApplicationBuilder app)
 		{
-			app.UseMvc(routes =>
+            //has to be before app.UseMvc
+			app.UseIdentity();
+
+            app.UseMvc(routes =>
 			{
 				routes.MapRoute(
 					name: "default",
-					template: "{controller=Home}/{action=Index}/{id?}");
+                    //when project loaded, lead to Account/Index view
+					template: "{controller=Account}/{action=Index}/{id?}");
 			});
-
-			loggerFactory.AddConsole();
-
-			if (env.IsDevelopment())
-			{
-				app.UseDeveloperExceptionPage();
-			}
-
-			app.UseStaticFiles();
 
 			app.Run(async (context) =>
 			{

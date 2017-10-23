@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using BasicAuthentication;
 using Microsoft.AspNetCore.Hosting;
 
-namespace ToDoList
+namespace BasicAuthentication
 {
     public class Program
     {
