@@ -1,5 +1,25 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model IEnumerable<BasicAuthentication.Models.Item>
+
 @{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+<h2>Here is your list of tasks, @User.Identity.Name</h2>
+<hr/>
+
+@if (Model.Any())
+{
+    <ul>
+        @foreach (var listItem in Model)
+	    {
+            <li>@Html.DisplayFor(modelItem => listItem.Description)</li>
+	    }
+    </ul>
+}
+else 
+{
+    <p>No tasks have been added yet!</p>
+}
+
+@Html.ActionLink("Create new", "Create")

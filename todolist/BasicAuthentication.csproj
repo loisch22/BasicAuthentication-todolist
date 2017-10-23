@@ -10,10 +10,8 @@
     <Folder Include="Views\" />
     <Folder Include="Views\Home\" />
     <Folder Include="Models\" />
-    <Folder Include="Views\Items\" />
     <Folder Include="Views\Shared\" />
     <Folder Include="wwwroot\css\" />
-    <Folder Include="Views\Categories\" />
     <Folder Include="Models\Repositories\" />
     <Folder Include="Views\Account\" />
     <Folder Include="ViewModels\" />
@@ -45,5 +43,19 @@
     <Compile Remove="Migrations\20171023181630_AddItemTable.Designer.cs" />
     <Compile Remove="Migrations\20171023181630_AddItemTable.cs" />
     <Compile Remove="Migrations\ApplicationDbContextModelSnapshot.cs" />
+    <Compile Remove="Controllers\ItemsController.cs" />
+    <Compile Remove="Controllers\HomeController.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Remove="Views\Items\Create.cshtml" />
+    <Content Remove="Views\Items\Delete.cshtml" />
+    <Content Remove="Views\Items\Details.cshtml" />
+    <Content Remove="Views\Items\Edit.cshtml" />
+    <Content Remove="Views\Items\Index.cshtml" />
+    <Content Remove="Views\Categories\Create.cshtml" />
+    <Content Remove="Views\Categories\Delete.cshtml" />
+    <Content Remove="Views\Categories\Details.cshtml" />
+    <Content Remove="Views\Categories\Edit.cshtml" />
+    <Content Remove="Views\Categories\Index.cshtml" />
   </ItemGroup>
 </Project>
